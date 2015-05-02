@@ -2,16 +2,17 @@
 
 class Login_Reg extends CI_Model 
 {
-
+	//inserts a new user into the database upon registration
 	function new_user($post)
 	{	
 		$password = md5($post['password']);
 
-		$query = "INSERT INTO users (first_name, last_name, email, password, created_at) VALUES (?,?,?,?,?)";
-		$values = array($post['first_name'], $post['last_name'], $post['email'], $password, date("Y-m-d, H:i:s"));
+		$query = "INSERT INTO users (first_name, last_name, email, password, created_at, user_level) VALUES (?,?,?,?,?,?)";
+		$values = array($post['first_name'], $post['last_name'], $post['email'], $password, date("Y-m-d, H:i:s"), $post['user_level']);
 		return $this->db->query($query, $values);
 	}
 
+	//get a specific user
 	function get_user($post)
 	{
 		$password = md5($post['password']);

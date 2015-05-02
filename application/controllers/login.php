@@ -31,25 +31,38 @@ class Login extends CI_Controller
 	public function sign_in()
 	{
 		$this->load->model('Login_Reg');
-		$person = $this->Login_Reg->get_user($this->input->post());
-	
-		if($person)
+		$customer = $this->Login_Reg->get_user($this->input->post());
+
+	//if our query comes back with a user we run the following code and set the array to a session so we can access throughout the site.
+		if($customer)
 		{
 			$user = array(
-				'user_id'=> $person['id'],
-				'first_name' => $person['first_name'],
-				'last_name' => $person['last_name'],
-				'email' => $person['email'],
-				'full_name' => $person['first_name'] . ' ' . $person['last_name'],
+				'user_id'=> $customer['id'],
+				'user_level' => $customer['user_level'],
+				'first_name' => $customer['first_name'],
+				'last_name' => $customer['last_name'],
+				'email' => $customer['email'],
+				'full_name' => $customer['first_name'] . ' ' . $customer['last_name'],
 				'is_logged_in' => true
 				);
-		
+
 			$this->session->set_userdata($user);
-			redirect('/dashboard/dashboard');// change this to dashboard/user_dashboard after we merge
+
+	 //if the customer has an admin level of 9 then he is sent to the admin dashboard, otherwise if he has an admin level of 1 
+	 //the user is sent to the user dashboard to see all users
+			if($user['user_level'] === '9')
+			{
+				redirect('/dashboard/admin_dashboard');			
+			}
+			else
+			{
+				redirect('/dashboard/user_dashboard'); 
+			}
 		}
+		
 		else
 		{
-			$this->session->set_flashdata('user_error', "Invalid Email or Password!");
+			$this->session->set_flashdata('user_error', "Invalid Email or Password! Please try again!");
 			redirect('/login/go_to_sign_in');
 		}
 	}
@@ -74,25 +87,37 @@ class Login extends CI_Controller
 		}
 		else 
 		{
-		//if the user passes validations and has inputed the right information then we run this statement that puts from the model and puts the
-		//info in an array where we can access it in a session 
-		$this->load->model('Login_Reg');
-		$person = $this->Login_Reg->new_user($this->input->post());
-	
-		$user = array(
-			'user_id' => $person['id'],
-			'first_nmae' => $person['first_name'],
-			'last_name' => $person['last_name'],
-			'email' => $person['email'],
-			'full_name' => $person['first_name'] . ' ' . $person['last_name'],
-			'is_logged_in' => true
-			);
+		//we get the get users method in our model and then store any records in $customer. If is null then the user level is set to 9, otherwise it 
+		//stays at 1 and is stored in the database.
+			$this->load->model("User_model");
+			$customer = $this->User_model->get_all_users();
+			$data = $this->input->post();
 
-		$this->session->set_userdata($user);
+			$this->load->model('Login_Reg');
+			$this->Login_Reg->new_user($data);
 
-		redirect('/dashboard/dashboard'); //make this dashboard/user_dashboard once we do the merge 
-		}
+		//if we don't get a record back in our database, then its the first user and we set the first user's admin level to 9, and redirect to the 
+		//admin dashboard. If $customer is not null we know there are previous customers and we redirect to the user dashboard. The admin user
+		//can set other users up as admins.
+			if($customer === null)
+			{		
+				$data['user_level'] = '9';
+				redirect('/dashboard/admin_dashboard');
+
+			}
+			else
+			{
+				redirect('/dashboard/user_dashboard'); 
+			}
+		
+	   }
 	}
 }
 
-?>
+
+
+
+
+
+
+

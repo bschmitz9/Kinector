@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/js/bootstrap.min.js">
 	<link rel="stylesheet" type="text/css" href="assets/partials/footer.css">
+	<link rel="stylesheet" type="text/css" href="assets/login.css">
 </head>
 <body>
 <!-- this loads the header we use for login and registration -->
@@ -19,6 +20,8 @@
 			<div class="col-md-6">
 <!-- this is the form the user will user to register for the site -->
 				<form action="registration" method="post">
+				<!-- hidden input field to set each user value at 1, if it is the first user we set the admin level to 9 in the controller-->
+				 <input type="hidden" class="form-control" name="user_level" value="1" id="first_name" placeholder="Your First Name">
 				  <div class="form-group">
 				    <label for="first_name">First Name</label>
 				    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Your First Name">
@@ -44,11 +47,14 @@
 
 				<p>Already have an account? Login<a href="/sign_in"> here</a></p>
 			</div>
-			<div class="col-md-6 text-center alert alert-danger alert-dismissable fade in" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<!--We show the user the error messages generated from the login/registration controller-->
-				<?php echo $this->session->flashdata("form_validation"); ?>
+			<?php if ($this->session->flashdata("form_validation"))
+			{ ?>
+			<div class="col-md-6 alert alert-danger .alert-dismissible fade in message" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					<span aria-hidden="true">&times;</span></button>
+				<?= $this->session->flashdata("form_validation"); ?>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 <!-- end of registration form -->

@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/js/bootstrap.min.js">
 	<link rel="stylesheet" type="text/css" href="assets/partials/footer.css">
+	<link rel="stylesheet" type="text/css" href="assets/login.css">
+
 </head>
 <body>
 <!-- this gets our header that doesnt't have the active class on the home link in the navbar-->
@@ -30,12 +32,17 @@
 				    <label for="password">Password</label>
 				    <input type="password" class="form-control" name="password" id="password" placeholder="Your Password">
 				  </div>
-				  <button type="submit" class="btn btn-success">Sign In</li></button>
+				  <button type="submit" class="btn btn-success">Sign In</button>
 				</form>
 			</div>
-			<div class="alert alert-danger" role="alert">
+			<?php if ($this->session->flashdata('user_error'))
+			{?>
+			<div class="col-md-6 alert alert-danger .alert-dismissible fade in message" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  					<span aria-hidden="true">&times;</span></button>
 				<?= $this->session->flashdata("user_error"); ?>
 			</div>
+			<?php } ?>
 		</div>
 
 		<p>Don't have an account? Register<a href="/register"> here</a></p>
