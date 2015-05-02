@@ -27,13 +27,13 @@ class Users extends CI_Controller
 
 	public function post_message()
 	{
-		$this->Users_model->post_message($this->input->post());
+		$this->User_model->post_message($this->input->post());
 		$this->show($this->input->post('user_id'));
 	}
 
 	public function post_comment()
 	{
-		$this->Users_model->post_comment($this->input->post());
+		$this->User_model->post_comment($this->input->post());
 		$this->show($this->input->post('profile_id'));
 	}
 
