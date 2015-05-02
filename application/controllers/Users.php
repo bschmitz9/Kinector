@@ -8,6 +8,21 @@ class Users extends CI_Controller
 		$this->load->model('User_model');
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
+		$this->load->model('Dash_model');
+	}
+
+	public function show($id)
+	{
+		$comments = $this->User_model->get_comments();
+		$messages = $this->User_model->get_messages();
+		$user = $this->Dash_model->get_one_user($id);
+		$data = array(
+			'comments' => $comments,
+			'messages' => $messages,
+			'user' => $user			
+			);
+		$this->load->view('user/show', $data);
+
 	}
 
 //admin sends post info from the views/users/new page =========================
@@ -145,7 +160,10 @@ class Users extends CI_Controller
 		$this->User_model->delete($id);
 		redirect('/dashboard/admin_dashboard');
 	}
+
+
 }
+
 
 
 

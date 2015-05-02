@@ -13,12 +13,17 @@
 	</style>
 </head>
 <body>
-	<?php $this->load->view('partials/welcome_header') ?>	
+	<?php $this->load->view('partials/welcome_header'); 
+	var_dump($user);
+	var_dump($messages);
+	var_dump($comments);
+	?>	
 	<div class="container">
 		<div class='col-md-5'>
 		<table class='table col-md-5'>
 			<thead>
 				<th>Michael Choi</th>
+				<th><a href="">Edit your profile</a></th>
 			</thead>
 			<tr>
 				<td>Registered at:</td>
