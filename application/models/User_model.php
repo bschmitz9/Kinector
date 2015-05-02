@@ -16,6 +16,28 @@ class User_model extends CI_Model
 		return $this->db->query($query) -> result_array();
 	}
 
+	public function post_message($data)
+	{
+		$author = $data['author_id'];
+		$profile = $data['user_id'];
+		$content = $data['message'];
+		$query = "INSERT INTO messages (author_id, user_id, content, created_at) VALUES(?,?,?,NOW())";
+		$values = array($author, $profile, $content, date("F j, Y"));
+		$this->db->query($query, $values);
+	}
+
+	public function post_comment($data)
+	{
+		$message = $data['message_id'];
+		$user = $data['user_id'];
+		$content = $data['message'];
+		$query = "INSERT INTO comments (user_id, message_id, content, created_at) VALUES(?,?,?,NOW())";
+		$values = array($user, $message, $content, date("F j, Y"));
+		$this->db->query($query, $values);
+	}
+
+
+
 	public function update_info($data)
 	{
 		$query = "UPDATE users SET first_name=?, last_name=?, email=?, user_level=? WHERE id=?";

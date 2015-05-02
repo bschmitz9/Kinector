@@ -14,9 +14,9 @@ class Dashboard extends CI_Controller
 		// $this->load->view('/dashboard/dashboard');
 		// $this->load->view('/dashboard/admin');
 		// $this->load->view('/users/new');
-		// $this->load->view('/users/edit');
+		$this->load->view('/user/edit');
 		// $this->load->view('/user/edit_admin');
-		$this->load->view('/user/show');
+		// $this->load->view('/user/show');
 		// $this->admin_dashboard();
 		// $this->user_dashboard();
 
