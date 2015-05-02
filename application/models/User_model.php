@@ -51,7 +51,7 @@ class User_model extends CI_Model
 	{
 		$query = "SELECT CONCAT(users.first_name,' ', users.last_name) AS name, comments.message_id, comments.user_id, comments.content, comments.created_at  
 			FROM comments LEFT JOIN users on users.id = comments.user_id";
-		return $this->db->query($query)->result_array;
+		return $this->db->query($query)->result_array();
 	}
 	public function get_messages()
 	{

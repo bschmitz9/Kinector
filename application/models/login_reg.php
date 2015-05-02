@@ -7,8 +7,8 @@ class Login_Reg extends CI_Model
 	{	
 		$password = md5($post['password']);
 
-		$query = "INSERT INTO users (first_name, last_name, email, password, created_at, user_level) VALUES (?,?,?,?,?,?)";
-		$values = array($post['first_name'], $post['last_name'], $post['email'], $password, date("Y-m-d, H:i:s"), $post['user_level']);
+		$query = "INSERT INTO users (first_name, last_name, email, password, created_at, user_level) VALUES (?,?,?,?,NOW(),?)";
+		$values = array($post['first_name'], $post['last_name'], $post['email'], $password, date("F j, Y"), $post['user_level']);
 		return $this->db->query($query, $values);
 	}
 
