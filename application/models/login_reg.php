@@ -20,6 +20,8 @@ class Login_Reg extends CI_Model
 		return $this->db->query("SELECT * FROM users WHERE email = ? AND password = ?", array($post['email'], $password)) -> row_array();
 	}
 
+	
+
 
 
 
