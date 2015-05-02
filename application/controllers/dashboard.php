@@ -5,7 +5,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		// $this->output->enable_profiler();
+		$this->load->model("dash_model");
 	}
 
 	public function index ()
@@ -22,9 +22,25 @@ class Dashboard extends CI_Controller
 
 	}
 
+
 	public function add_user()
 	{
 		$this->load->view('/user/new');  // directs admin to add a new user page
+	}
+	public function edit($id)
+	{
+		$data = array(
+			"user" => $this->dash_model->get_one_user($id)
+			);
+		$this->load->view('user/edit', $data);
+	}
+	public function edit_admin($id)
+	{
+		$data = array(
+			"user" => $this->dash_model->get_one_user($id)
+			);
+		$this->load->view('user/edit_admin', $data);
+	
 	}
 //==========If user logs in with user_level less than 9, directs to user dashboard
 	public function user_dashboard()

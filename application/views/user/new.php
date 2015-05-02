@@ -25,7 +25,7 @@
 				<h3>Add a new user</h3>
 			</div>
 			<div class='col-md-6'>
-				<form action='/' method='post'>
+				<form action='/dashboard/admin_dashboard' method='post'>
 					<button type="submit" class="btn btn-primary pull-right head">Return to Dashboard</button>
 				</form>
 			</div>

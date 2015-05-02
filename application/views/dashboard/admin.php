@@ -10,22 +10,56 @@
 		button{
 			margin-top:4%;
 		}
+		#delete{
+			/*width:50%;*/
+			display:inline-block;
+		}
 	</style>
 </head>
 <body>
 <?php $this->load->view('partials/welcome_header') ?>	
 	<div class='container'>
-		<div class='header'>
+		<div class='header row'>
 			<div class='col-md-6'>
 				<h3>Manage Users</h3>
 			</div>
 			<div class='col-md-6'>
-				<form action='dashboard/add_user' method='post'>
+				<form action='/dashboard/add_user' method='post'>
 					<button type="submit" class="btn btn-primary pull-right head">Add new</button>
 				</form>
 			</div>
 	
 		</div>
+		
+
+
+<?php if($this->session->userdata('delete'))
+		{ 
+			$name = $this->session->userdata('delete')['first_name']." " . $this->session->userdata('delete')['last_name'] ;
+			$id = $this->session->userdata('delete')['id'];
+	
+			?>
+		<div class='alert alert-danger alert-dismissible row'>
+			<p>Are you sure you want to delete <?= $name ?> , user #<?= $id ?></p>
+			<form action="/Users/delete/<?= $id ?>" id='delete'>
+			<button type="submit" class="btn btn-success" action="/Users/delete/<?= $id ?>" aria-label="Close">
+  				<span aria-hidden="true">Yes</span>
+  			</form>
+			</button>
+			<button type="button" class="btn btn-danger" data-dismiss="alert"  aria-label="Close">
+  				<span aria-hidden="true">No</span>
+			</button>
+		
+
+		</div>
+
+		<?php 
+		$this->session->unset_userdata('delete');
+	} ?>			
+
+
+
+
 			<table class='table table-striped table-bordered' >
 				<thead>
 					<th>ID</th>
@@ -43,7 +77,7 @@
 					<td><?= $user['email'] ?></td>
 					<td><?= $user['created_at'] ?></td>
 					<td><?= $user['user_level'] ?></td>
-					<td><a href="edit/<?= $user['id']?>">edit</a> | <a href="remove/<?= $user['id']?>">remove</a></td>
+					<td><a href="/dashboard/edit_admin/<?= $user['id']?>">edit</a> | <a href="/Users/delete_conf/<?= $user['id']?>">remove</a></td>
 				</tr>	
 <?php		}
 
