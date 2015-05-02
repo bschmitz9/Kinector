@@ -47,4 +47,16 @@ class User_model extends CI_Model
 		$query = "DELETE FROM users WHERE id=".$id;
 		$this->db->query($query);
 	}
+	public function get_comments()
+	{
+		$query = "SELECT CONCAT(users.first_name,' ', users.last_name) AS name, comments.message_id, comments.user_id, comments.content, comments.created_at  
+			FROM comments LEFT JOIN users on users.id = comments.user_id";
+		return $this->db->query($query)->result_array;
+	}
+	public function get_messages()
+	{
+		$query = "SELECT CONCAT(users.first_name,' ', users.last_name) AS name, messages.user_id, messages.author_id, messages.id, messages.content, messages.created_at  
+					FROM messages LEFT JOIN users on users.id = messages.author_id";
+		return $this->db->query($query)->result_array();	
+	}
 }
