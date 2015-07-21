@@ -22,17 +22,18 @@
 		<h3>All Users</h3>
 		<table class='table table-striped table-bordered' >
 			<thead>
-				<th>ID</th>
 				<th>Name</th>
-				<th>email</th>
-				<th>created_at</th>
+				<th>Email</th>
+				<th>Joined</th>
 			</thead>
-<?php foreach ($users as $user) { ?>
+<?php foreach ($users as $user) { 
+				$timestring = strtotime($user['created_at']);
+				$date = date("D F j, o", $timestring);
+	?>
 				<tr>	
-					<td><?= $user['id'] ?></td>
 					<td><a href="/Users/show/<?= $user['id'] ?>"><?= $user['first_name']." ".$user['last_name']; ?></a></td>
 					<td><?= $user['email'] ?></td>
-					<td><?= $user['created_at'] ?></td>
+					<td><?= $date ?></td>
 				</tr>	
 <?php		}		?>				
 		</table>
