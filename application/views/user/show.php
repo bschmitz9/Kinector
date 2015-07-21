@@ -13,12 +13,7 @@
 	</style>
 </head>
 <body>
-	<?php $this->load->view('partials/users'); 
-	// var_dump($user);
-	// var_dump($messages);
-	// var_dump($comments);
-	// var_dump($this->session->userdata);
-	?>	
+	<?php $this->load->view('partials/users'); 	?>	
 	<div class="container">
 		<div class='col-md-5'>
 			<table class='table col-md-5'>
@@ -28,8 +23,11 @@
 					<th><a href="/dashboard/edit/<?= $user['id']  ?>">Edit your profile</a></th>
 				</thead>
 				<tr>
-					<td>Registered on:</td>
-					<td><?= $user['created_at']  ?></td>
+					<?php 
+						$timestring = strtotime($user['created_at']);
+						$date = date("D F j, o", $timestring);?>
+					<td>Joined:</td>
+					<td><?= $date  ?></td>
 				</tr>
 				<tr>
 					<td>User ID</td>
@@ -64,7 +62,7 @@
 			{ 
 			if($message['user_id'] === $user['id'])
 			{ 
-					$timestring = strtotime($comment['created_at']);
+					$timestring = strtotime($message['created_at']);
 					$date = date("D F j, o", $timestring);
 					$time = date("g:i A", $timestring);
 				?>

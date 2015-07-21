@@ -17,18 +17,11 @@
 	</style>
 </head>
 <body>
-<?php $this->load->view('partials/welcome_header') ?>	
+<?php $this->load->view('partials/user') ?>	
 	<div class='container'>
-		<div class='header row'>
-			<div class='col-md-6'>
-				<h3>Manage Users</h3>
-			</div>
-			<div class='col-md-6'>
-				<form action='/dashboard/add_user' method='post'>
-					<button type="submit" class="btn btn-primary pull-right head">Add new</button>
-				</form>
-			</div>
-	
+		<div class='row col-md-12 '>
+				<h3>Manage Users
+					<a type="submit" class="btn btn-success pull-right head" href='/dashboard/add_user'>Add new</a></h3>
 		</div>
 		
 
@@ -64,18 +57,21 @@
 				<thead>
 					<th>ID</th>
 					<th>Name</th>
-					<th>email</th>
-					<th>created_at</th>
-					<th>user_level</th>
-					<th>actions</th>
+					<th>Email</th>
+					<th>Joined</th>
+					<th>User Level</th>
+					<th>Actions</th>
 				</thead>
 <?php 
-		foreach ($users as $user) { ?>
+		foreach ($users as $user) { 
+				$timestring = strtotime($user['created_at']);
+				$date = date("D F j, o", $timestring);
+			?>
 				<tr>	
 					<td><?= $user['id'] ?></td>
 					<td><a href="/Users/show/<?= $user['id'] ?>"><?= $user['first_name']." ".$user['last_name']; ?></a></td>
 					<td><?= $user['email'] ?></td>
-					<td><?= $user['created_at'] ?></td>
+					<td><?= $date ?></td>
 					<td><?= $user['user_level'] ?></td>
 					<td><a href="/dashboard/edit_admin/<?= $user['id']?>">edit</a> | <a href="/Users/delete_conf/<?= $user['id']?>">remove</a></td>
 				</tr>	
