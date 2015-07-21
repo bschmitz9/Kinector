@@ -99,9 +99,11 @@
 				</div>
 			<?php } ?>
 		<?php } ?>
-		
-
 	</div> <!-- end of container -->
+
+	<!-- footer -->
+		<?php $this->load->view('partials/footer') ?>
+	<!-- end of footer-->
 
 </body>
 </html>

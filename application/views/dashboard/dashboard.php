@@ -39,5 +39,8 @@
 		</table>
 
 	</div>
+	<!-- footer -->
+	<?php $this->load->view('partials/footer') ?>
+	<!-- end of footer-->
 </body>
 </html>

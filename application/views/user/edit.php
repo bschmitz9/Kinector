@@ -11,11 +11,13 @@
 		button{
 			margin-top:3%;
 		}
+		.head{
+			margin-top:4%;
+		}
 		.addform{
 			padding:0;
 		}
 		.bordered{
-			border:1px solid black;
 			padding:3%;
 		}
 		.desc{
@@ -35,7 +37,7 @@
 			</div>
 			<div class='col-md-6'>
 				<form action='/dashboard/user_dashboard' method='post'>
-					<a href="/dashboard/user_dashboard" type="button" class="btn btn-primary pull-right head">Return to Dashboard</a>
+					<a href="/dashboard/user_dashboard" type="button" class="btn btn-success pull-right head">Return to Dashboard</a>
 				</form>
 			</div>
 		</div>
@@ -88,7 +90,7 @@
 			</div>
 			<div class='col-md-12 bordered desc'>
 				<form action='/Users/update_description' method='post'>
-					<h4>Edit Description</h4>
+					<h4>Edit Your Description</h4>
 					<textarea class="form-control" name='description' rows="4"><?= $user['description'] ?></textarea>
 					<button type="submit" class="btn btn-success pull-right">Save</button>
 					<input type="hidden" name='id' value="<?= $user['id'] ?>" >
@@ -97,6 +99,10 @@
 			</div>
 		</div>	
 	</div>
+
+	<!-- footer -->
+		<?php $this->load->view('partials/footer') ?>
+	<!-- end of footer-->
 	
 
 
