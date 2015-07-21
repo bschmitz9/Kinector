@@ -17,6 +17,7 @@
 	// var_dump($user);
 	// var_dump($messages);
 	// var_dump($comments);
+	// var_dump($this->session->userdata);
 	?>	
 	<div class="container">
 		<div class='col-md-5'>
@@ -49,7 +50,7 @@
 		<div class='col-md-12 bordered desc'>
 			<form action="/users/post_message" method="post">
 				<h4>Leave a message for <?= $user['first_name']  ?></h4>
-				<input type="hidden" value="<?= $this->session->userdata('id') ?>" name="author_id"/>
+				<input type="hidden" value="<?= $this->session->userdata('user_id') ?>" name="author_id"/>
 				<input type="hidden" value="<?= $user['id']  ?>" name="user_id"/>
 				<textarea class="form-control" name="message" rows="4"></textarea>
 				<button type="submit" class="btn btn-success pull-right">Post</button>
@@ -62,9 +63,13 @@
 			foreach($messages as $message)
 			{ 
 			if($message['user_id'] === $user['id'])
-			{ ?>
+			{ 
+					$timestring = strtotime($comment['created_at']);
+					$date = date("D F j, o", $timestring);
+					$time = date("g:i A", $timestring);
+				?>
 				<div class='col-md-12'>
-					<h5><a href="/Users/show/<?= $message['author_id'] ?>"><?= $message['name']  ?></a> wrote</h5>
+					<h5><a href="/Users/show/<?= $message['author_id'] ?>"><?= $message['name']  ?></a> wrote on <?= $date ?> at <?= $time ?>:</h5>
 					<p class='message'><?= $message['content'] ?></p>
 				</div>
 			<?php 
@@ -72,9 +77,13 @@
 				foreach ($comments as $comment)
 				{
 					if($comment['message_id'] === $message['id'])
-					{ ?>
+					{ 
+							$timestring = strtotime($comment['created_at']);
+							$date = date("D F j, o", $timestring);
+							$time = date("g:i A", $timestring);
+						?>
 						<div class='col-md-11 pull-right'>
-							<h5><a href="/Users/show/<?= $comment['user_id'] ?>"><?= $comment['name']  ?></a> wrote</h5>
+							<h5><a href="/Users/show/<?= $comment['user_id'] ?>"><?= $comment['name']  ?></a> wrote on <?= $date ?> at <?= $time ?>:</h5>
 							<p class='comment'><?= $comment['content'] ?></p>
 						</div>
 				<?php } ?>
@@ -83,7 +92,7 @@
 			wrapped inside the outer foreach loop and the if statement-->
 				<div class='col-md-11 pull-right'>
 					<form action="/users/post_comment" method="post">
-						<input type="hidden" value="<?= $this->session->userdata('id') ?>" name="user_id"/>
+						<input type="hidden" value="<?= $this->session->userdata('user_id') ?>" name="user_id"/>
 						<input type="hidden" value="<?= $message['id'] ?>" name="message_id"/>
 						<input type="hidden" value="<?= $user['id']  ?>" name="profile_id"/>
 						<textarea class="form-control" rows="4" placeholder="Write a comment..." name="message"></textarea>
