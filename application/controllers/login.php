@@ -50,7 +50,7 @@ class Login extends CI_Controller
 
 	 //if the customer has an admin level of 9 then he is sent to the admin dashboard, otherwise if he has an admin level of 1 
 	 //the user is sent to the user dashboard to see all users
-			if($user['user_level'] === '9')
+			if($user['user_level'] === 9)
 			{
 				redirect('/dashboard/admin_dashboard');			
 			}
@@ -65,6 +65,20 @@ class Login extends CI_Controller
 			$this->session->set_flashdata('user_error', "Invalid Email or Password! Please try again!");
 			redirect('/login/go_to_sign_in');
 		}
+	}
+
+	public function guest_login ()
+	{
+		$guest = array(
+				'user_id'=> 0,
+				'first_name' => "Guest",
+				'full_name' => "Guest",
+				'is_logged_in' => true
+				);
+
+			$this->session->set_userdata($guest);
+			redirect('/dashboard/user_dashboard'); 
+
 	}
 
 	//validates the new user registration
@@ -93,24 +107,49 @@ class Login extends CI_Controller
 			$customer = $this->User_model->get_all_users();
 			$data = $this->input->post();
 
+			if($customer == null)
+			{		
+				$data['user_level'] = 9;
+			}
+			else
+			{
+				$data['user_level'] = 1;
+			}
+			// var_dump($data);
+			// die();
+
 			$this->load->model('Login_Reg');
-			$this->Login_Reg->new_user($data);
+			$user=$this->Login_Reg->new_user($data);
+
 
 		//if we don't get a record back in our database, then its the first user and we set the first user's admin level to 9, and redirect to the 
 		//admin dashboard. If $customer is not null we know there are previous customers and we redirect to the user dashboard. The admin user
 		//can set other users up as admins.
-			if($customer === null)
-			{		
-				$data['user_level'] = '9';
-				redirect('/dashboard/admin_dashboard');
+		// $customer = $this->input->post();
+			$customer = $this->Login_Reg->get_user($this->input->post());
+		
+			$user = array(
+				'user_id'=> $customer['id'],
+				'user_level' => $customer['user_level'],
+				'first_name' => $customer['first_name'],
+				'last_name' => $customer['last_name'],
+				'email' => $customer['email'],
+				'full_name' => $customer['first_name'] . ' ' . $customer['last_name'],
+				'is_logged_in' => true
+				);
 
+			$this->session->set_userdata($user);
+
+			if($data['user_level'] === 9)
+			{		
+				redirect('/dashboard/admin_dashboard');
 			}
 			else
 			{
 				redirect('/dashboard/user_dashboard'); 
 			}
 		
-	   }
+	  }
 	}
 }
 

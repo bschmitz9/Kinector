@@ -47,6 +47,7 @@
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="sign_in">Sign In</a></li>
+	        <li><a href="guest">Skip login</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->

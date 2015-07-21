@@ -45,6 +45,7 @@
             <li><a href="/dashboard/user_dashboard">Home<span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li class='navbar-text'>Hi, <?= $this->session->userdata('first_name') ?></li>
             <li><a href="/registration">Log Out</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
