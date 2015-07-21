@@ -22,7 +22,7 @@ class User_model extends CI_Model
 		$profile = $data['user_id'];
 		$content = $data['message'];
 		$query = "INSERT INTO messages (author_id, user_id, content, created_at) VALUES(?,?,?,NOW())";
-		$values = array($author, $profile, $content, date("F j, Y"));
+		$values = array($author, $profile, $content);
 		$this->db->query($query, $values);
 	}
 
@@ -32,7 +32,7 @@ class User_model extends CI_Model
 		$user = $data['user_id'];
 		$content = $data['message'];
 		$query = "INSERT INTO comments (user_id, message_id, content, created_at) VALUES(?,?,?,NOW())";
-		$values = array($user, $message, $content, date("F j, Y"));
+		$values = array($user, $message, $content);
 		$this->db->query($query, $values);
 	}
 
