@@ -25,7 +25,6 @@
 		</div>
 		
 
-
 <?php if($this->session->userdata('delete'))
 		{ 
 			$name = $this->session->userdata('delete')['first_name']." " . $this->session->userdata('delete')['last_name'] ;
@@ -49,9 +48,6 @@
 		<?php 
 		$this->session->unset_userdata('delete');
 	} ?>			
-
-
-
 
 			<table class='table table-striped table-bordered' >
 				<thead>

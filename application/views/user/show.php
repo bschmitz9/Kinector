@@ -20,7 +20,7 @@
 				<!-- here we add all the user information for the specific user we clicked on from the user dashboard, it shows at the top of the profile page-->
 				<thead>
 					<th><?= $user['first_name']. " ". $user['last_name']  ?></th>
-					<th><a href="/dashboard/edit/<?= $user['id']  ?>">Edit your profile</a></th>
+					<th><?php if($user['id'] == $this->session->userdata['user_id']) { ?><a href="/dashboard/edit/<?= $user['id']  ?>">Edit your profile</a><?php } ?></th>
 				</thead>
 				<tr>
 					<?php 
