@@ -25,8 +25,7 @@
 	</style>
 </head>
 <body>
-	<?php $this->load->view('partials/welcome_header'); 
-	var_dump($user);?>	
+	<?php $this->load->view('partials/users'); ?>	
 
 
 	<div class='container'>
@@ -36,7 +35,7 @@
 			</div>
 			<div class='col-md-6'>
 				<form action='/dashboard/user_dashboard' method='post'>
-					<button type="button" class="btn btn-primary pull-right head">Return to Dashboard</button>
+					<a href="/dashboard/user_dashboard" type="button" class="btn btn-primary pull-right head">Return to Dashboard</a>
 				</form>
 			</div>
 		</div>

@@ -13,7 +13,7 @@
 	</style>
 </head>
 <body>
-	<?php $this->load->view('partials/welcome_header'); 
+	<?php $this->load->view('partials/users'); 
 	// var_dump($user);
 	// var_dump($messages);
 	// var_dump($comments);

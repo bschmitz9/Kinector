@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-<?php $this->load->view('partials/welcome_header') ?>	
+<?php $this->load->view('partials/users') ?>	
 	<div class='container'>
 		<h3>All Users</h3>
 		<table class='table table-striped table-bordered' >
@@ -26,7 +26,6 @@
 				<th>Name</th>
 				<th>email</th>
 				<th>created_at</th>
-				<th>user_level</th>
 			</thead>
 <?php foreach ($users as $user) { ?>
 				<tr>	
@@ -34,7 +33,6 @@
 					<td><a href="/Users/show/<?= $user['id'] ?>"><?= $user['first_name']." ".$user['last_name']; ?></a></td>
 					<td><?= $user['email'] ?></td>
 					<td><?= $user['created_at'] ?></td>
-					<td><?= $user['user_level'] ?></td>
 				</tr>	
 <?php		}		?>				
 		</table>

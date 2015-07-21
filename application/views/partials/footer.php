@@ -21,7 +21,7 @@
 <body>
 	<!-- this is the footer -->
 	<footer class="text-center">
-		 User Dashboard, LLC &copy; 2015.
+		 Kinector, LLC &copy; 2015.
 	</footer>
 
 
