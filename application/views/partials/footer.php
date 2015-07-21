@@ -17,12 +17,17 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		/*space above the footer partial and the rest of the page above*/
+		.foot{
+			margin-top: 40px;
+		}
+
+	</style>
 </head>
 <body>
 	<!-- this is the footer -->
-	<footer class="text-center">
+	<footer class="text-center foot">
 		 Kinector, LLC &copy; 2015.
 	</footer>
-
-
 </body>
