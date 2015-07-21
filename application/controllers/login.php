@@ -67,6 +67,20 @@ class Login extends CI_Controller
 		}
 	}
 
+	public function guest_login ()
+	{
+		$guest = array(
+				'user_id'=> 0,
+				'first_name' => "Guest",
+				'full_name' => "Guest",
+				'is_logged_in' => true
+				);
+
+			$this->session->set_userdata($guest);
+			redirect('/dashboard/user_dashboard'); 
+
+	}
+
 	//validates the new user registration
 	public function registration ()
 	{

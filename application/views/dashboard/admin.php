@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-<?php $this->load->view('partials/user') ?>	
+<?php $this->load->view('partials/users') ?>	
 	<div class='container'>
 		<div class='row col-md-12 '>
 				<h3>Manage Users
