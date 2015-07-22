@@ -102,7 +102,7 @@
 			<!--This is the form that we use for each to allow a user to post a comment for each message on the profile page, this form is 
 			wrapped inside the outer foreach loop and the if statement-->
 			<div class="row">
-				<div class='col-md-7'>
+				<div class='col-md-offset-1 col-md-6'>
 					<form action="/users/post_comment" method="post">
 						<input type="hidden" value="<?= $this->session->userdata('user_id') ?>" name="user_id"/>
 						<input type="hidden" value="<?= $message['id'] ?>" name="message_id"/>
