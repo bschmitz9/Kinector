@@ -20,8 +20,7 @@
 <?php $this->load->view('partials/users') ?>	
 	<div class='container'>
 		<div class='row col-md-12 '>
-				<h3>Manage Users
-					<a type="submit" class="btn btn-success pull-right head" href='/dashboard/add_user'>Add new</a></h3>
+				<h3>Manage Users</h3>
 		</div>
 		
 

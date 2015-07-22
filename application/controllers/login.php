@@ -47,17 +47,7 @@ class Login extends CI_Controller
 				);
 
 			$this->session->set_userdata($user);
-
-	 //if the customer has an admin level of 9 then he is sent to the admin dashboard, otherwise if he has an admin level of 1 
-	 //the user is sent to the user dashboard to see all users
-			if($user['user_level'] == 9)
-			{
-				redirect('/dashboard/admin_dashboard');			
-			}
-			else
-			{
-				redirect('/dashboard/user_dashboard'); 
-			}
+			redirect('/dashboard/user_dashboard'); 
 		}
 		
 		else
@@ -140,16 +130,14 @@ class Login extends CI_Controller
 
 			$this->session->set_userdata($user);
 
-			if($data['user_level'] == 9)
-			{		
-				redirect('/dashboard/admin_dashboard');
-			}
-			else
-			{
-				redirect('/dashboard/user_dashboard'); 
-			}
-		
+			redirect('/dashboard'); 
 	  }
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/');
 	}
 }
 

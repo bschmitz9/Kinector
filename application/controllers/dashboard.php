@@ -50,19 +50,26 @@ class Dashboard extends CI_Controller
 		$values = array(
 			'users' => $users
 			);
-		$this->load->view('dashboard/dashboard', $values);
+		if($this->session->userdata('user_level') == 9)
+		{
+			$this->load->view('dashboard/admin', $values);
+			// redirect('/dashboard/admin_dashboard');
+		} else
+		{
+			$this->load->view('/dashboard/dashboard', $values);
+		}
 	}
 
 //=======If user logs in with user_level 9, directs to admin dashboard
-	public function admin_dashboard()
-	{
-		$this->load->model('User_model');
-		$users = $this->User_model->get_all_users();
-		$values = array(
-			'users' => $users
-			);
-		$this->load->view('dashboard/admin', $values);
-	}
+	// public function admin_dashboard()
+	// {
+	// 	$this->load->model('User_model');
+	// 	$users = $this->User_model->get_all_users();
+	// 	$values = array(
+	// 		'users' => $users
+	// 		);
+	// 	$this->load->view('dashboard/admin', $values);
+	// }
 	
 }
 
